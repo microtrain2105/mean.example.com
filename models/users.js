@@ -32,6 +32,12 @@ var Users = new Schema({
 
 });
 
+// Modifying an existing user shall automatically update the modified date.
+Users.pre('save', function(next){
+    this.modified = new Date().toISOString();
+    next();
+  });
+  
 //Add unique validation properties to the model
 Users.plugin(uniqueValidator);
 
