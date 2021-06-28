@@ -142,7 +142,7 @@ function registrationForm(){
           validate.registrationForm();
         }
       }
-      
+
   })();
   // ~line 121
 var validate = (function() {
