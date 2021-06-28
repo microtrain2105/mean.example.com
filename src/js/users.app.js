@@ -360,3 +360,7 @@ function deleteView(id){
   
   
   usersApp.load();
+
+  window.addEventListener("hashchange", function(){
+    usersApp.load();
+  });
