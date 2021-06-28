@@ -214,17 +214,20 @@ xhr.onload = function(){
     `;
   
     app.innerHTML=form;
-  }
+    processRequest('editUser', '/api/users', 'PUT');
+    }
 }
-      function postRequest(formId, url){
-        let form = document.getElementById(formId);
+    //   function postRequest(formId, url){
+        function processRequest(formId, url, method){
+            let form = document.getElementById(formId);
         form.addEventListener('submit', function(e){
           e.preventDefault();
     
           let formData = new FormData(form);
           let uri = `${window.location.origin}${url}`;
           let xhr = new XMLHttpRequest();
-          xhr.open('POST', uri);
+        //   xhr.open('POST', uri);
+        xhr.open(method, uri);
     
           xhr.setRequestHeader(
             'Content-Type',
@@ -256,7 +259,8 @@ xhr.onload = function(){
             switch(hashArray[0]){
             case '#create':
                 createUser();
-                postRequest('createUser', '/api/users');
+                // postRequest('createUser', '/api/users');
+                processRequest('createUser', '/api/users', 'POST');
                 break;
                                               
             case '#view':
