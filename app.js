@@ -15,11 +15,10 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var config = require('./config.dev');
 var apiUsersRouter = require('./routes/api/users');
-
+var apiAuthRouter = require('./routes/api/auth');
 
 //Test the file
 // console.log(config);
-
 var app = express();
 
 //Connect to MongoDB
@@ -70,10 +69,10 @@ passport.deserializeUser(function(user, done){
   done(null, user);
 });
 
-
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/api/users', apiUsersRouter);
+app.use('/api/auth', apiAuthRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
