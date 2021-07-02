@@ -60,7 +60,7 @@ gulp.task('build-users-js', function() {
 
 gulp.task('build-articles-js', function() {
 
-  var userApp = gulp.src([
+  var articleApp = gulp.src([
     'src/js/articles.app.js',
   ])
   .pipe(concat('articles.app.min.js'))

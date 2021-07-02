@@ -10,18 +10,21 @@ var MongoStore = require('connect-mongo')(session);
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 
-var Users = require('./models/users');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
-var config = require('./config.dev');
+var Users = require('./models/users');
+var articlesRouter = require('./routes/articles');
+var Articles = require('./models/articles');
+
+var authRouter = require('./routes/auth');
 var apiUsersRouter = require('./routes/api/users');
 var apiArticlesRouter = require('./routes/api/articles');
 var apiAuthRouter = require('./routes/api/auth');
-var authRouter = require('./routes/auth');
 
 //Test the file
 // console.log(config);
 var app = express();
+var config = require('./config.dev');
 
 //Connect to MongoDB
 mongoose.connect(config.mongodb, {useUnifiedTopology: true, useNewUrlParser: true, useCreateIndex: true });
@@ -128,13 +131,14 @@ app.use(function(req,res,next){
 });
 
 
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use('/auth', authRouter);
 app.use('/api/users', apiUsersRouter);
 app.use('/api/auth', apiAuthRouter);
 app.use('/api/articles', apiArticlesRouter);
-app.use('/auth', authRouter);
 
+app.use('/', indexRouter);
+app.use('/users', usersRouter);
+app.use('/articles', articlesRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
